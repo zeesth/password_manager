@@ -28,37 +28,67 @@ def generator():
     
     return password_result
     
-def save(website_entry, user_entry, password_entry):
+def generator():
+    #   Creates a list of characters to choose from
+    letters_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols_list = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    letters_n = randint(4,8)
+    numbers_n = randint(4,(15 - letters_n))
+    symbols_n = 16-letters_n - numbers_n
+
+    #   Chooses each type of character randomly from the lists
+    letters = [choice(letters_list) for i in range(letters_n)]
+
+    numbers = [choice(numbers_list) for i in range(numbers_n)]
+        
+    symbols = [choice(symbols_list) for i in range(symbols_n)]
+
+    password = letters + numbers + symbols
+    #   Reorganizes the choosen characteres and returns
+    password = sample(password, len(password))
+    password_result = ''.join(password)
     
+    return password_result
+    
+    
+def save(website_entry, login_entry, password_entry):
     #   Saves each value given by the user in a variable
     website = website_entry.get()
-    user = user_entry.get()
+    login = login_entry.get()
     password = password_entry.get()
     
+    new_account = {
+        website: {
+            "login": login,
+            "password": password,
+        }
+    }
+    
     #   Checks if all values were filled
-    if website == "" or user == "" or password == "":
+    if website == "" or login == "" or password == "":
         messagebox.showinfo(title="Error", message="Please fill all fields.")
-
     else:
         try:
             #   Loads the data, updates and then writes it again
             with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.json", "r") as data_json:
                 data = json.load(data_json)
                 data.update(new_account)
-                
             with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.json", "w") as data_json:
                 json.dump(data, data_json, indent=4)
-                
-            #   Used when the file is empty or hasn't been created yet
+            
         except:
+            #   If the file doesn't exist or is empty, creates and fill it
             with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.json", "w") as data_json:
                 json.dump(new_account, data_json, indent=4)
                 
-        #   Clears all fields
-        website_entry.delete(0, END)
-        login_entry.delete(0, END)
-        login_entry.insert(0, "vitor.gracindo@hotmail.com")
-        password_entry.delete(0, END)
+        finally:
+            #   Clears all fields after the function is done
+            website_entry.delete(0, END)
+            login_entry.delete(0, END)
+            login_entry.insert(0, "vitor.gracindo@hotmail.com")
+            password_entry.delete(0, END)
 
 def search(website_entry):
     website = website_entry.get()
