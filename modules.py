@@ -1,5 +1,6 @@
 from random import choice, sample, randint
 from tkinter import messagebox, END
+import json
 
 def generator():
     #   Creates a list of characters to choose from
