@@ -13,6 +13,10 @@ def call_generator():
 def call_save():
     modules.save(website_entry, user_entry, password_entry)
 
+# Calling the function to search the data for the user account
+def call_search():
+    modules.search(website_entry)
+
 #   Seting up the app window
 screen = Tk()
 screen.title("Password Manager")
@@ -29,31 +33,35 @@ canvas.place(x=180, y=20)
 website_label = Label(text="Website:")
 website_label.place(x=20, y=250)
 
-website_entry = Entry(width=53)
+website_entry = Entry(width=34)
 website_entry.place(x=125, y= 250)
 website_entry.focus()
 
 #   Creating the email/username entry space and its label
 user_label = Label(text="Email/Username:")
-user_label.place(x=20, y=270)
+user_label.place(x=20, y=280)
 
 user_entry = Entry(width=53)
-user_entry.place(x=125, y=270)
+user_entry.place(x=125, y=280)
 user_entry.insert(0, "vitor.gracindo@hotmail.com")
 
 #   Creating the password entry space and its label
 password_label = Label(text="Password:")
-password_label.place(x=20, y=290)
+password_label.place(x=20, y=310)
 
 password_entry = Entry(width=34)
-password_entry.place(x=125, y=290)
+password_entry.place(x=125, y=310)
+
+#   Creating the search button
+search_button = Button(text="Search", command=call_search)
+search_button.place(x=373, y=247)
 
 #   Creating the generate password button
 gen_pas = Button(text="Generate Password", highlightthickness=0, command=call_generator)
-gen_pas.place(x=373, y=287)
+gen_pas.place(x=373, y=307)
 
 #   Creating the add button
 add_button = Button(text="Add", width=50, command=call_save)
-add_button.place(x=125, y=313)
+add_button.place(x=125, y=333)
 
 screen.mainloop()
