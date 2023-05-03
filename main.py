@@ -21,7 +21,7 @@ screen.geometry("580x400")
 
 #   Creating the image to the window
 canvas = Canvas(width=200, height=214, highlightthickness=0)
-img = PhotoImage(file="Python/100 Days of Code/Intermediate/Projects/Password Manager/logo.png")
+img = PhotoImage(file="logo.png")
 canvas.create_image(100, 107, image=img)
 canvas.place(x=180, y=20)
 
