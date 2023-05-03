@@ -10,19 +10,18 @@ def generator():
     password = ''
 
     #   Chooses the quantity of each character, limiting the password lenght to 16
-    letters = randint(4,8)
-    numbers = randint(4, 15-letters)
-    symbols = 16-letters-numbers
-    
+    letters_n = randint(4,8)
+    numbers_n = randint(4,(15 - letters_n))
+    symbols_n = 16-letters_n - numbers_n
+
     #   Chooses each type of character randomly from the lists
-    for letter in range(letters):
-        password += choice(letters_list)
+    letters = [choice(letters_list) for i in range(letters_n)]
+
+    numbers = [choice(numbers_list) for i in range(numbers_n)]
         
-    for symbol in range(symbols):
-        password += choice(symbols_list)
-        
-    for number in range(numbers):
-        password += choice(numbers_list)
+    symbols = [choice(symbols_list) for i in range(symbols_n)]
+
+    password = letters + numbers + symbols
 
     #   Reorganizes the choosen characteres and returns
     password = sample(password, len(password))
