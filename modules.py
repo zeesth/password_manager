@@ -72,15 +72,15 @@ def save(website_entry, login_entry, password_entry):
     else:
         try:
             #   Loads the data, updates and then writes it again
-            with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.json", "r") as data_json:
+            with open("data.json", "r") as data_json:
                 data = json.load(data_json)
                 data.update(new_account)
-            with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.json", "w") as data_json:
+            with open("data.json", "w") as data_json:
                 json.dump(data, data_json, indent=4)
             
         except:
             #   If the file doesn't exist or is empty, creates and fill it
-            with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.json", "w") as data_json:
+            with open("data.json", "w") as data_json:
                 json.dump(new_account, data_json, indent=4)
                 
         finally:
@@ -94,7 +94,7 @@ def search(website_entry):
     website = website_entry.get()
     
     #   Retrieves the stored data
-    with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.json", "r") as data_json:
+    with open("data.json", "r") as data_json:
         data_stored = json.load(data_json)
         
     #   Searches for the credentials for the specified website
