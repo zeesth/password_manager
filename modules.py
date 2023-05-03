@@ -45,7 +45,7 @@ def save(website_entry, user_entry, password_entry):
         sure = messagebox.askokcancel(title=website, message=f"Are you sure you want to save these details? \nEmail: {user} \nPassword: {password} \n")
         #   Writes the account information and clears all fields
         if sure:
-            with open("Python/100 Days of Code/Intermediate/Projects/Password Manager/data.txt", "a") as data:
+            with open("data.txt", "a") as data:
                 data.write(f"{website} | {user} | {password}\n")
             
             website_entry.delete(0, END)
